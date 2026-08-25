@@ -1,43 +1,54 @@
 /**
- * EZEE VISION CHAMPUA - Google Apps Script backend
+ * EZEE VISION CHAMPUA — optional Google Sheets backend
+ *
  * 1. Create a Google Sheet.
- * 2. Extensions > Apps Script.
- * 3. Paste this code.
- * 4. Change SHEET_NAME if needed.
- * 5. Deploy > New deployment > Web app > Anyone.
- * 6. Put the Web App URL into assets/app.js and admin/index.html.
+ * 2. Extensions → Apps Script.
+ * 3. Paste this file.
+ * 4. Deploy → New deployment → Web app.
+ *    Execute as: Me
+ *    Who has access: Anyone
+ * 5. Copy the Web App URL.
+ *
+ * IMPORTANT: the static demo stores data in the browser by default.
+ * For production cloud storage, connect this endpoint from app.js and
+ * add authentication/rate limiting appropriate for your use case.
  */
 const SHEET_NAME = "Responses";
 
-function doPost(e) {
-  const sheet = getSheet();
-  const data = JSON.parse(e.postData.contents || "{}");
-  const headers = getHeaders(sheet, data);
-  const row = headers.map(h => data[h] ?? "");
-  sheet.appendRow(row);
-  return json({ok:true});
+function doGet(){
+  const sh=getSheet();
+  const values=sh.getDataRange().getValues();
+  if(values.length<2)return output([]);
+  const headers=values.shift();
+  return output(values.map(row=>Object.fromEntries(headers.map((h,i)=>[h,row[i]]))));
 }
 
-function doGet() {
-  const sheet = getSheet();
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return json([]);
-  const headers = values.shift();
-  return json(values.map(r => Object.fromEntries(headers.map((h,i)=>[h,r[i]]))));
+function doPost(e){
+  const data=JSON.parse(e.postData.contents||"{}");
+  const sh=getSheet();
+  let headers=getHeaders(sh);
+  const incoming=Object.keys(data);
+  const missing=incoming.filter(k=>!headers.includes(k));
+  if(missing.length){
+    sh.getRange(1,headers.length+1,1,missing.length).setValues([missing]);
+    headers=headers.concat(missing);
+  }
+  sh.appendRow(headers.map(h=>data[h]??""));
+  return output({ok:true});
 }
 
 function getSheet(){
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
-  return sheet;
+  const ss=SpreadsheetApp.getActiveSpreadsheet();
+  let sh=ss.getSheetByName(SHEET_NAME);
+  if(!sh)sh=ss.insertSheet(SHEET_NAME);
+  return sh;
 }
-function getHeaders(sheet,data){
-  let headers = sheet.getLastColumn() ? sheet.getRange(1,1,1,sheet.getLastColumn()).getValues()[0] : [];
-  const keys = Object.keys(data);
-  if (!headers.length || headers[0] === "") { sheet.getRange(1,1,1,keys.length).setValues([keys]); return keys; }
-  const missing=keys.filter(k=>!headers.includes(k));
-  if(missing.length){sheet.getRange(1,headers.length+1,1,missing.length).setValues([missing]);headers=headers.concat(missing);}
-  return headers;
+function getHeaders(sh){
+  const last=sh.getLastColumn();
+  if(last===0)return [];
+  return sh.getRange(1,1,1,last).getValues()[0].filter(String);
 }
-function json(obj){return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);}
+function output(data){
+  return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
