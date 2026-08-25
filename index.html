@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#07152f">
+<title>EZEE VISION CHAMPUA | Student / Enquiry Form</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <img src="assets/logo.png" alt="EZEE VISION CHAMPUA">
+    <div>
+      <h1>EZEE VISION <span>CHAMPUA</span></h1>
+      <p>Student / Enquiry Form</p>
+    </div>
+  </header>
+
+  <main class="form-card">
+    <div class="progress-wrap">
+      <div class="step-text">Step <b id="stepNo">1</b> of 4</div>
+      <div class="progress"><i id="progress"></i></div>
+    </div>
+
+    <form id="enquiryForm">
+      <section class="step active">
+        <h2>👤 Personal Information</h2>
+        <p class="hint">Please fill in your basic details.</p>
+        <label>Full Name <em>*</em><input name="fullName" required placeholder="Enter your full name"></label>
+        <label>Father's Name <em>*</em><input name="fatherName" required placeholder="Enter father's name"></label>
+        <label>Mobile Number <em>*</em><input name="mobile" required inputmode="numeric" maxlength="10" placeholder="Enter mobile number"></label>
+        <label>WhatsApp Number<input name="whatsapp" inputmode="numeric" maxlength="10" placeholder="Enter WhatsApp number"></label>
+        <label>Email Address<input name="email" type="email" placeholder="Enter email address"></label>
+      </section>
+
+      <section class="step">
+        <h2>📚 Academic Details</h2>
+        <p class="hint">Tell us about your current studies.</p>
+        <label>School / Institution<input name="school" placeholder="Enter school name"></label>
+        <label>Class <em>*</em>
+          <select name="class" required><option value="">Select class</option><option>8th</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Other</option></select>
+        </label>
+        <label>Course Interested <em>*</em><input name="course" required placeholder="e.g. CBSE, JEE, NEET"></label>
+        <label>Subjects<input name="subjects" placeholder="e.g. Maths, Science"></label>
+      </section>
+
+      <section class="step">
+        <h2>🕐 Preferences</h2>
+        <p class="hint">Choose your preferred schedule.</p>
+        <label>Preferred Time
+          <select name="preferredTime"><option value="">Select time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select>
+        </label>
+        <label>How did you hear about us?
+          <select name="source"><option value="">Select source</option><option>Direct</option><option>WhatsApp</option><option>QR Code</option><option>Instagram</option><option>Friend / Referral</option><option>Other</option></select>
+        </label>
+        <label>Additional Message<textarea name="message" rows="5" placeholder="Write your enquiry or message"></textarea></label>
+      </section>
+
+      <section class="step">
+        <h2>✅ Review & Submit</h2>
+        <p class="hint">Please review your information before submitting.</p>
+        <div id="review" class="review"></div>
+        <p class="privacy">Your response is submitted securely to the configured Google Sheet endpoint.</p>
+      </section>
+
+      <div class="actions">
+        <button type="button" id="prev" class="secondary">Previous</button>
+        <button type="button" id="next">Next</button>
+        <button type="submit" id="submit" class="success" hidden>Submit Response</button>
+      </div>
+    </form>
+  </main>
+
+  <footer>EZEE VISION CHAMPUA • Smart Form System</footer>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
