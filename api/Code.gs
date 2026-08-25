@@ -19,8 +19,8 @@
  * 7) Put the Web App URL + ADMIN_TOKEN in assets/config.js.
  */
 const SHEET_NAME = "Responses";
-const ADMIN_TOKEN = "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET";
-const NOTIFICATION_EMAIL = ""; // Optional. Leave blank to use the deploying account.
+const ADMIN_TOKEN = "EVChampua_2026_9X7K_Form_Admin_82Qp";
+const NOTIFICATION_EMAIL = "creativesayeedd@gmail.com"; // Optional. Leave blank to use the deploying account.
 const DUPLICATE_HOURS = 0; // 0 = never allow the same student twice; change only if needed.
 
 function doPost(e) {
