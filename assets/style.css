@@ -1,0 +1,11 @@
+:root{--navy:#061634;--blue:#0c4fb8;--gold:#f5c531;--green:#18a957;--text:#172033;--muted:#667085;--card:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#031027,#0a2452);color:var(--text);min-height:100vh}
+.page{width:min(760px,94%);margin:auto;padding:24px 0}.brand{display:flex;align-items:center;gap:16px;color:white;margin-bottom:18px}.brand img{width:78px;height:78px;object-fit:contain;border-radius:50%}.brand h1{margin:0;font-size:clamp(25px,6vw,42px);letter-spacing:.5px}.brand h1 span{color:var(--gold)}.brand p{margin:5px 0 0;color:#dce7ff}
+.form-card{background:rgba(255,255,255,.97);border-radius:22px;padding:25px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.progress-wrap{margin-bottom:25px}.step-text{font-size:13px;color:var(--muted);margin-bottom:8px}.progress{height:8px;background:#e5e7eb;border-radius:10px;overflow:hidden}.progress i{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--blue),var(--green));transition:.3s}
+.step{display:none}.step.active{display:block}.step h2{margin:0 0 6px;color:var(--navy)}.hint{color:var(--muted);margin:0 0 20px}
+label{display:block;font-weight:650;margin:16px 0}em{color:#e11;font-style:normal}input,select,textarea{display:block;width:100%;margin-top:7px;border:1px solid #d5dae4;border-radius:11px;padding:13px 14px;font:inherit;outline:none;background:white}input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,79,184,.1)}
+.actions{display:flex;gap:10px;margin-top:24px}.actions button{border:0;border-radius:11px;padding:13px 20px;font-weight:700;cursor:pointer;flex:1;background:var(--blue);color:white}.actions .secondary{background:#e9edf3;color:#263247}.actions .success{background:var(--green)}
+.review{background:#f7f9fc;border:1px solid #e3e7ef;border-radius:14px;padding:14px}.review-row{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid #e8ebf0}.review-row:last-child{border-bottom:0}.review-row b{color:#475467}
+.privacy{font-size:12px;color:var(--muted);margin-top:15px}footer{text-align:center;color:#b8c6e4;font-size:12px;padding:18px}
+@media(max-width:520px){.page{padding:14px 0}.form-card{padding:18px}.brand img{width:62px;height:62px}.brand h1{font-size:25px}.actions{flex-wrap:wrap}.actions button{min-width:45%}}
