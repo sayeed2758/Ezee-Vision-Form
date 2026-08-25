@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EZEE VISION | Admin</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><div class="page"><header class="brand"><img src="../assets/logo.png"><div><h1>EZEE VISION <span>CHAMPUA</span></h1><p>Admin Dashboard</p></div></header>
-<div class="form-card"><h2>📊 Response Dashboard</h2><p class="hint">Connect this dashboard to your Google Sheet / Apps Script endpoint to load live responses.</p>
-<div id="stats" class="review"></div><br><button onclick="loadData()" style="border:0;border-radius:10px;padding:12px 18px;background:#0c4fb8;color:white;font-weight:700">Refresh Responses</button>
-<div id="table" style="overflow:auto;margin-top:18px"></div></div><footer>Made with ❤️ by Shahid Sir</footer></div>
-<script>
-const API_URL="";
-async function loadData(){const box=document.getElementById("table"),stats=document.getElementById("stats");if(!API_URL){stats.innerHTML="<b>Setup required:</b> Add your Apps Script Web App URL in admin/index.html.";return}try{const r=await fetch(API_URL);const data=await r.json();stats.innerHTML="<b>Total Responses:</b> "+data.length; if(!data.length){box.innerHTML="<p>No responses found.</p>";return}let keys=Object.keys(data[0]);let html="<table style='width:100%;border-collapse:collapse'><tr>"+keys.map(k=>"<th style='padding:10px;text-align:left;background:#eef2f7'>"+k+"</th>").join("")+"</tr>";for(const row of data)html+="<tr>"+keys.map(k=>"<td style='padding:10px;border-bottom:1px solid #eee'>"+(row[k]??"")+"</td>").join("")+"</tr>";box.innerHTML=html+"</table>"}catch(e){stats.innerHTML="Unable to load data. Check your Apps Script URL."}}
-loadData();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071936">
+<title>EZEE VISION CHAMPUA — Admin</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-page="admin">
+<div id="app"></div>
+<script src="../assets/admin.js"></script>
+</body>
+</html>
